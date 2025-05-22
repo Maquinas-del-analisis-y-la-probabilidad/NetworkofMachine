@@ -1,8 +1,4 @@
-import random
-
-
-def ip_generator() -> str:
-    return ".".join([random.randint(0, 255).__str__() for _ in range(4)])
+import secrets
 
 
 class DataPackage:
@@ -14,13 +10,12 @@ class DataPackage:
 
 
 def data_package_generator() -> DataPackage:
-    payload_size = random.randint(100, 1500)
-    flagged = random.choice([True, False])
-    source_ip = ip_generator()
-    destionation_ip = ip_generator()
-    return DataPackage(source_ip, destionation_ip, payload_size, flagged)
+    payload_size = secrets.randbelow(1401) + 100  # 100-1500
+    flagged = secrets.choice([True, False])
+    source_ip = ip_generator_secure()
+    destination_ip = ip_generator_secure()
+    return DataPackage(source_ip, destination_ip, payload_size, flagged)
 
 
-if __name__ == "__main__":
-    # sumulation of data strem of machines
-    print(ip_generator())
+def ip_generator_secure() -> str:
+    return ".".join([str(secrets.randbelow(256)) for _ in range(4)])
