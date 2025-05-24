@@ -1,5 +1,6 @@
 import random
 import uuid
+import data_package
 
 
 class Machine:
@@ -7,6 +8,7 @@ class Machine:
         self.id = id
         self.type = type
         self.status = status
+        self.ip_direction = data_package.ip_generator()
 
 
 status = ["Active", "Inactive", "Maintenance"]
@@ -14,10 +16,8 @@ types = ["Server", "Router", "Switch"]
 
 
 def machine_generator():
-    status_index = random.randint(0, len(status) - 1)
-    type_index = random.randint(0, len(types) - 1)
-    machine_id = uuid.uuid1()
+    status_machine = random.choice(status)
+    type_machine = random.choice(types)
+    machine_id = uuid.uuid1().__str__()
 
-    return Machine(
-        id=machine_id.__str__(), type=types[type_index], status=status[status_index]
-    )
+    return Machine(id=machine_id, type=type_machine, status=status_machine)

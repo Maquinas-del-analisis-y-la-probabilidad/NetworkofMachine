@@ -1,16 +1,20 @@
 from machine import machine_generator
 from data_package import data_package_generator
-import time
+import datetime
+import uuid
 
 
 def main():
-    # sumulation of data strem of machines
-    while True:
-        machine = machine_generator()
-        package = data_package_generator()
-        time.sleep(0.25)
-        dict = {machine: machine.__dict__, package: package.__dict__}
-        print(dict)
+    print("Hello world")
+
+
+def packet_generator():
+    return {
+        "_id": uuid.uuid1().__str__(),
+        "machine": machine_generator().__dict__.__str__(),
+        "package": data_package_generator().__dict__.__str__(),
+        "time_stamp": datetime.datetime.now().isoformat().__str__(),
+    }
 
 
 if __name__ == "__main__":
