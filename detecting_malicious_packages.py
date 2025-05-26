@@ -1,7 +1,6 @@
 # Detecting malicious packages
 # with hashing using reputation-based filtering
 
-import hashlib
 from data_package import data_package_generator
 import time
 
@@ -36,3 +35,4 @@ def is_malicious(package):
 
 if __name__ == "__main__":
     main()
+
