@@ -12,10 +12,10 @@ class DataPackage:
 def data_package_generator() -> DataPackage:
     payload_size = secrets.randbelow(1401) + 100  # 100-1500
     flagged = secrets.choice([True, False])
-    source_ip = ip_generator_secure()
-    destination_ip = ip_generator_secure()
+    source_ip = ip_generator()
+    destination_ip = ip_generator()
     return DataPackage(source_ip, destination_ip, payload_size, flagged)
 
 
-def ip_generator_secure() -> str:
+def ip_generator() -> str:
     return ".".join([str(secrets.randbelow(256)) for _ in range(4)])
