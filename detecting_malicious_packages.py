@@ -2,9 +2,10 @@
 # with hashing using reputation-based filtering
 
 from data_package import data_package_generator
+from data_package import DataPackage
 import time
 
-black_list = [data_package_generator().__hash__() for _ in range(50)]
+black_list = [data_package_generator().get_hash() for _ in range(50)]
 
 
 def main():
@@ -21,18 +22,17 @@ def main():
             print(package.__dict__)
             print(
                 "Malicious package hash: ",
-                package.__hash__(),
+                package.get_hash(),
             )
             print("\n\n")
 
         time.sleep(0.5)
 
 
-def is_malicious(package):
-    package_hash = package.__hash__()
+def is_malicious(package: DataPackage):
+    package_hash = package.get_hash()
     return package_hash in black_list
 
 
 if __name__ == "__main__":
     main()
-
